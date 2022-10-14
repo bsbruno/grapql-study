@@ -1,25 +1,18 @@
-const user = () =>{
-  return{
-    id: '1',
-    name: 'John'
-  }
+
+
+const user = async (obj, arg, ctx, info) => {
+  const idUser = arg.id
+  const user = await ctx.fetch(`http://localhost:3000/users/${idUser}`)
+  return user.json()
 }
-const users = () =>{
-  return[
-    {
-      id: '45',
-      name: 'John'
-    },
-    {
-      id: '113',
-      name: 'John123'
-    }
-  ]
+const users = async (obj, arg, ctx, info) => {
+
+  const users = await ctx.fetch('http://localhost:3000/users')
+  return users.json()
 }
 
 
-
-export const userResolvers ={
+export const userResolvers = {
   Query: {
     user,
     users
